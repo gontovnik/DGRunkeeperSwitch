@@ -9,9 +9,9 @@
 import UIKit
 
 // MARK: -
-// MARK: DGRunkeeperSwitchLayer
+// MARK: DGRunkeeperSwitchRoundedLayer
 
-class DGRunkeeperSwitchLayer: CALayer {
+class DGRunkeeperSwitchRoundedLayer: CALayer {
 
     override var frame: CGRect {
         didSet { cornerRadius = bounds.height / 2.0 }
@@ -117,7 +117,7 @@ class DGRunkeeperSwitch: UIControl {
         titleLabelsContentView.addSubview(rightTitleLabel)
         addSubview(titleLabelsContentView)
         
-        object_setClass(selectedBackgroundView.layer, DGRunkeeperSwitchLayer.self)
+        object_setClass(selectedBackgroundView.layer, DGRunkeeperSwitchRoundedLayer.self)
         addSubview(selectedBackgroundView)
         
         selectedTitleLabelsContentView.addSubview(selectedLeftTitleLabel)
@@ -126,7 +126,7 @@ class DGRunkeeperSwitch: UIControl {
         
         (leftTitleLabel.textAlignment, rightTitleLabel.textAlignment, selectedLeftTitleLabel.textAlignment, selectedRightTitleLabel.textAlignment) = (.Center, .Center, .Center, .Center)
         
-        object_setClass(titleMaskView.layer, DGRunkeeperSwitchLayer.self)
+        object_setClass(titleMaskView.layer, DGRunkeeperSwitchRoundedLayer.self)
         titleMaskView.backgroundColor = .blackColor()
         selectedTitleLabelsContentView.layer.mask = titleMaskView.layer
         
@@ -166,7 +166,7 @@ class DGRunkeeperSwitch: UIControl {
     // MARK: -
     
     override class func layerClass() -> AnyClass {
-        return DGRunkeeperSwitchLayer.self
+        return DGRunkeeperSwitchRoundedLayer.self
     }
     
     func tapped(gesture: UITapGestureRecognizer!) {
