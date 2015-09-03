@@ -2,6 +2,7 @@
 Runkeeper design switch control (two part segment control) developed in Swift 2.0
 
 ![alt tag](https://raw.githubusercontent.com/gontovnik/DGRunkeeperSwitch/master/DGRunkeeperSwitch.png)
+![alt tag](https://raw.githubusercontent.com/gontovnik/DGRunkeeperSwitch/master/DGRunkeeperSwitch.gif)
 
 ## Requirements
 * Xcode 7-beta or higher
