@@ -91,7 +91,7 @@ class DGRunkeeperSwitch: UIControl {
     // MARK: Constructors
 
     init(leftTitle: String!, rightTitle: String!) {
-        super.init(frame: CGRect.zeroRect)
+        super.init(frame: CGRect.zero)
         
         self.leftTitle = leftTitle
         self.rightTitle = rightTitle
@@ -236,7 +236,8 @@ class DGRunkeeperSwitch: UIControl {
         (leftTitleLabel.frame, selectedLeftTitleLabel.frame) = (leftTitleLabelFrame, leftTitleLabelFrame)
         
         let rightTitleLabelSize = rightTitleLabel.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
-        let rightTitleLabelFrame = CGRect(origin: CGPoint(x: floor(bounds.size.width / 2.0 + (bounds.width / 2.0 - rightTitleLabelSize.width) / 2.0), y: floor((bounds.height - rightTitleLabelSize.height) / 2.0)), size: rightTitleLabelSize)
+        let tempPoint = CGPoint(x: floor(bounds.size.width / 2.0 + (bounds.width / 2.0 - rightTitleLabelSize.width) / 2.0), y: floor((bounds.height - rightTitleLabelSize.height) / 2.0))
+        let rightTitleLabelFrame = CGRect(origin: tempPoint, size: rightTitleLabelSize)
         (rightTitleLabel.frame, selectedRightTitleLabel.frame) = (rightTitleLabelFrame, rightTitleLabelFrame)
     }
     
