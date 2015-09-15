@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         runkeeperSwitch.selectedTitleColor = UIColor(red: 255.0/255.0, green: 196.0/255.0, blue: 92.0/255.0, alpha: 1.0)
         runkeeperSwitch.titleFont = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
         runkeeperSwitch.frame = CGRect(x: 30.0, y: 40.0, width: 200.0, height: 30.0)
-        runkeeperSwitch.addTarget(self, action: Selector("switchValueDidChange"), forControlEvents: .ValueChanged)
+        runkeeperSwitch.addTarget(self, action: Selector("switchValueDidChange:"), forControlEvents: .ValueChanged)
         navigationItem.titleView = runkeeperSwitch
         
         let runkeeperSwitch2 = DGRunkeeperSwitch()
@@ -46,8 +46,8 @@ class ViewController: UIViewController {
     
     // MARK: -
 
-    func switchValueDidChange() {
-        print("valueChanged")
+    func switchValueDidChange(sender:DGRunkeeperSwitch) {
+        print("valueChanged: \(sender.selectedIndex)")
     }
     
 }
