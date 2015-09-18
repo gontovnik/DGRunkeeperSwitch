@@ -113,6 +113,8 @@ class DGRunkeeperSwitch: UIControl {
     
     private func finishInit() {
         // Setup views
+        (leftTitleLabel.lineBreakMode, rightTitleLabel.lineBreakMode) = (.ByTruncatingTail, .ByTruncatingTail)
+        
         titleLabelsContentView.addSubview(leftTitleLabel)
         titleLabelsContentView.addSubview(rightTitleLabel)
         addSubview(titleLabelsContentView)
@@ -228,15 +230,19 @@ class DGRunkeeperSwitch: UIControl {
         
         (titleLabelsContentView.frame, selectedTitleLabelsContentView.frame) = (bounds, bounds)
         
-        let titleLabelMaxWidth = bounds.width / 2.0 - selectedBackgroundInset * 2.0
+        let titleLabelMaxWidth = selectedBackgroundWidth
         let titleLabelMaxHeight = bounds.height - selectedBackgroundInset * 2.0
         
-        let leftTitleLabelSize = leftTitleLabel.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
+        var leftTitleLabelSize = leftTitleLabel.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
+        leftTitleLabelSize.width = min(leftTitleLabelSize.width, titleLabelMaxWidth)
+        
         let leftTitleLabelOrigin = CGPoint(x: floor((bounds.width / 2.0 - leftTitleLabelSize.width) / 2.0), y: floor((bounds.height - leftTitleLabelSize.height) / 2.0))
         let leftTitleLabelFrame = CGRect(origin: leftTitleLabelOrigin, size: leftTitleLabelSize)
         (leftTitleLabel.frame, selectedLeftTitleLabel.frame) = (leftTitleLabelFrame, leftTitleLabelFrame)
         
-        let rightTitleLabelSize = rightTitleLabel.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
+        var rightTitleLabelSize = rightTitleLabel.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
+        rightTitleLabelSize.width = min(rightTitleLabelSize.width, titleLabelMaxWidth)
+        
         let rightTitleLabelOrigin = CGPoint(x: floor(bounds.size.width / 2.0 + (bounds.width / 2.0 - rightTitleLabelSize.width) / 2.0), y: floor((bounds.height - rightTitleLabelSize.height) / 2.0))
         let rightTitleLabelFrame = CGRect(origin: rightTitleLabelOrigin, size: rightTitleLabelSize)
         (rightTitleLabel.frame, selectedRightTitleLabel.frame) = (rightTitleLabelFrame, rightTitleLabelFrame)

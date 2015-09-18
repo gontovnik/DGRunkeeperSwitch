@@ -42,6 +42,18 @@ class ViewController: UIViewController {
         runkeeperSwitch2.frame = CGRect(x: 50.0, y: 20.0, width: view.bounds.width - 100.0, height: 30.0)
         runkeeperSwitch2.autoresizingMask = [.FlexibleWidth]
         view.addSubview(runkeeperSwitch2)
+        
+        let runkeeperSwitch3 = DGRunkeeperSwitch()
+        runkeeperSwitch3.leftTitle = "Super long left title"
+        runkeeperSwitch3.rightTitle = "Super long right title"
+        runkeeperSwitch3.backgroundColor = UIColor(red: 239.0/255.0, green: 95.0/255.0, blue: 49.0/255.0, alpha: 1.0)
+        runkeeperSwitch3.selectedBackgroundColor = .whiteColor()
+        runkeeperSwitch3.titleColor = .whiteColor()
+        runkeeperSwitch3.selectedTitleColor = UIColor(red: 239.0/255.0, green: 95.0/255.0, blue: 49.0/255.0, alpha: 1.0)
+        runkeeperSwitch3.titleFont = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
+        runkeeperSwitch3.frame = CGRect(x: 50.0, y: 70.0, width: view.bounds.width - 100.0, height: 30.0)
+        runkeeperSwitch3.autoresizingMask = [.FlexibleWidth]
+        view.addSubview(runkeeperSwitch3)
     }
     
     // MARK: -
