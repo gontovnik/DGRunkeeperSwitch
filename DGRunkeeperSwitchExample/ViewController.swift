@@ -9,6 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // MARK: -
+    // MARK: Vars
+    
+    @IBOutlet weak var runkeeperSwitch4: DGRunkeeperSwitch?
 
     // MARK: -
     // MARK: Lifecycle
@@ -54,12 +59,26 @@ class ViewController: UIViewController {
         runkeeperSwitch3.frame = CGRect(x: 50.0, y: 70.0, width: view.bounds.width - 100.0, height: 30.0)
         runkeeperSwitch3.autoresizingMask = [.FlexibleWidth]
         view.addSubview(runkeeperSwitch3)
+        
+        if let runkeeperSwitch4 = runkeeperSwitch4 {
+            runkeeperSwitch4.leftTitle = "Apple"
+            runkeeperSwitch4.rightTitle = "Google"
+            runkeeperSwitch4.backgroundColor = UIColor(red: 122/255.0, green: 203/255.0, blue: 108/255.0, alpha: 1.0)
+            runkeeperSwitch4.selectedBackgroundColor = .whiteColor()
+            runkeeperSwitch4.titleColor = .whiteColor()
+            runkeeperSwitch4.selectedTitleColor = UIColor(red: 135/255.0, green: 227/255.0, blue: 120/255.0, alpha: 1.0)
+            runkeeperSwitch4.titleFont = UIFont(name: "HelveticaNeue-Light", size: 17.0)
+        }
     }
     
     // MARK: -
 
     func switchValueDidChange() {
         print("valueChanged")
+    }
+    
+    @IBAction func switchValueDidChange(sender: DGRunkeeperSwitch!) {
+        print("valueChanged: \(sender.selectedIndex)")
     }
     
 }

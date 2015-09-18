@@ -204,6 +204,10 @@ class DGRunkeeperSwitch: UIControl {
     }
     
     func setSelectedIndex(selectedIndex: Int, animated: Bool) {
+        if self.selectedIndex == selectedIndex {
+            return
+        }
+        
         self.selectedIndex = selectedIndex
         if animated {
             UIView.animateWithDuration(animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [UIViewAnimationOptions.BeginFromCurrentState, UIViewAnimationOptions.CurveEaseOut], animations: { () -> Void in
