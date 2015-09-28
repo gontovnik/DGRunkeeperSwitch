@@ -72,10 +72,6 @@ class ViewController: UIViewController {
     }
     
     // MARK: -
-
-    func switchValueDidChange(sender:DGRunkeeperSwitch) {
-        print("valueChanged: \(sender.selectedIndex)")
-    }
     
     @IBAction func switchValueDidChange(sender: DGRunkeeperSwitch!) {
         print("valueChanged: \(sender.selectedIndex)")
