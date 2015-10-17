@@ -20,6 +20,12 @@ Open and run the DGRunkeeperSwitchExample project in Xcode to see DGRunkeeperSwi
 
 All you need to do is drop DGRunkeeperSwitch.swift file into your project
 
+### CocoaPods
+
+``` ruby
+pod "DGRunkeeperSwitch", "~> 1.1"
+```
+
 ## Example usage
 
 ``` swift
