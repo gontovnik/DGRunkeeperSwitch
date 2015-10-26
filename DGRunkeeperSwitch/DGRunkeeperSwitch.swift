@@ -11,9 +11,9 @@ import UIKit
 // MARK: -
 // MARK: DGRunkeeperSwitchRoundedLayer
 
-class DGRunkeeperSwitchRoundedLayer: CALayer {
+public class DGRunkeeperSwitchRoundedLayer: CALayer {
 
-    override var frame: CGRect {
+    override public var frame: CGRect {
         didSet { cornerRadius = bounds.height / 2.0 }
     }
     
@@ -22,7 +22,7 @@ class DGRunkeeperSwitchRoundedLayer: CALayer {
 // MARK: -
 // MARK: DGRunkeeperSwitch
 
-class DGRunkeeperSwitch: UIControl {
+public class DGRunkeeperSwitch: UIControl {
 
     // MARK: -
     // MARK: Public vars
@@ -99,7 +99,7 @@ class DGRunkeeperSwitch: UIControl {
         finishInit()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         finishInit()
@@ -159,7 +159,7 @@ class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Observer
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "selectedBackgroundView.frame" {
             titleMaskView.frame = selectedBackgroundView.frame
         }
@@ -167,7 +167,7 @@ class DGRunkeeperSwitch: UIControl {
     
     // MARK: -
     
-    override class func layerClass() -> AnyClass {
+    override public class func layerClass() -> AnyClass {
         return DGRunkeeperSwitchRoundedLayer.self
     }
     
@@ -226,7 +226,7 @@ class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Layout
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         let selectedBackgroundWidth = bounds.width / 2.0 - selectedBackgroundInset * 2.0
@@ -259,7 +259,7 @@ class DGRunkeeperSwitch: UIControl {
 
 extension DGRunkeeperSwitch: UIGestureRecognizerDelegate {
     
-    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == panGesture {
             return selectedBackgroundView.frame.contains(gestureRecognizer.locationInView(self))
         }
