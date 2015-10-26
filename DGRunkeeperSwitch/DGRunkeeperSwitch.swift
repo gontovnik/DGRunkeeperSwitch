@@ -27,45 +27,45 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Public vars
     
-    var leftTitle: String {
+    public var leftTitle: String {
         set { (leftTitleLabel.text, selectedLeftTitleLabel.text) = (newValue, newValue) }
         get { return leftTitleLabel.text! }
     }
     
-    var rightTitle: String {
+    public var rightTitle: String {
         set { (rightTitleLabel.text, selectedRightTitleLabel.text) = (newValue, newValue) }
         get { return rightTitleLabel.text! }
     }
     
-    private(set) var selectedIndex: Int = 0
+    private(set) public var selectedIndex: Int = 0
     
-    var selectedBackgroundInset: CGFloat = 2.0 {
+    public var selectedBackgroundInset: CGFloat = 2.0 {
         didSet { setNeedsLayout() }
     }
     
-    var selectedBackgroundColor: UIColor! {
+    public var selectedBackgroundColor: UIColor! {
         set { selectedBackgroundView.backgroundColor = newValue }
         get { return selectedBackgroundView.backgroundColor }
     }
     
-    var titleColor: UIColor! {
+    public var titleColor: UIColor! {
         set { (leftTitleLabel.textColor, rightTitleLabel.textColor) = (newValue, newValue) }
         get { return leftTitleLabel.textColor }
     }
     
-    var selectedTitleColor: UIColor! {
+    public var selectedTitleColor: UIColor! {
         set { (selectedLeftTitleLabel.textColor, selectedRightTitleLabel.textColor) = (newValue, newValue) }
         get { return selectedLeftTitleLabel.textColor }
     }
     
-    var titleFont: UIFont! {
+    public var titleFont: UIFont! {
         set { (leftTitleLabel.font, rightTitleLabel.font, selectedLeftTitleLabel.font, selectedRightTitleLabel.font) = (newValue, newValue, newValue, newValue) }
         get { return leftTitleLabel.font }
     }
     
-    var animationDuration: NSTimeInterval = 0.3
-    var animationSpringDamping: CGFloat = 0.75
-    var animationInitialSpringVelocity: CGFloat = 0.0
+    public var animationDuration: NSTimeInterval = 0.3
+    public var animationSpringDamping: CGFloat = 0.75
+    public var animationInitialSpringVelocity: CGFloat = 0.0
     
     // MARK: -
     // MARK: Private vars
@@ -90,7 +90,7 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Constructors
 
-    init(leftTitle: String!, rightTitle: String!) {
+    public init(leftTitle: String!, rightTitle: String!) {
         super.init(frame: CGRect.zero)
         
         self.leftTitle = leftTitle
@@ -105,7 +105,7 @@ public class DGRunkeeperSwitch: UIControl {
         finishInit()
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         finishInit()
@@ -203,7 +203,7 @@ public class DGRunkeeperSwitch: UIControl {
         }
     }
     
-    func setSelectedIndex(selectedIndex: Int, animated: Bool) {
+    public func setSelectedIndex(selectedIndex: Int, animated: Bool) {
         if self.selectedIndex == selectedIndex {
             return
         }
