@@ -421,6 +421,7 @@
 				4508BA431C0CF52700BC38BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
