@@ -13,8 +13,9 @@ import UIKit
 
 public class DGRunkeeperSwitchRoundedLayer: CALayer {
 
-    override public var frame: CGRect {
-        didSet { cornerRadius = bounds.height / 2.0 }
+    override public var cornerRadius: CGFloat {
+        get { return CGFloat(bounds.height / 2.0) }
+        set { super.cornerRadius = newValue }
     }
     
 }
