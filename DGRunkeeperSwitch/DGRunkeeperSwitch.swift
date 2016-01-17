@@ -10,10 +10,10 @@ import UIKit
 
 // MARK: -
 // MARK: DGRunkeeperSwitchRoundedLayer
-
+@objc
 public class DGRunkeeperSwitchRoundedLayer: CALayer {
 
-    override public var bounds: CGRect {
+    @objc override public var frame: CGRect {
         didSet { cornerRadius = bounds.height / 2.0 }
     }
     
@@ -21,75 +21,76 @@ public class DGRunkeeperSwitchRoundedLayer: CALayer {
 
 // MARK: -
 // MARK: DGRunkeeperSwitch
-
+@objc
 public class DGRunkeeperSwitch: UIControl {
-    
+
     // MARK: -
     // MARK: Public vars
     
-    public var leftTitle: String {
+    @objc public var leftTitle: String {
         set { (leftTitleLabel.text, selectedLeftTitleLabel.text) = (newValue, newValue) }
         get { return leftTitleLabel.text! }
     }
     
-    public var rightTitle: String {
+    @objc public var rightTitle: String {
         set { (rightTitleLabel.text, selectedRightTitleLabel.text) = (newValue, newValue) }
         get { return rightTitleLabel.text! }
     }
     
-    private(set) public var selectedIndex: Int = 0
+    @objc private(set) public var selectedIndex: Int = 0
     
-    public var selectedBackgroundInset: CGFloat = 2.0 {
+    @objc public var selectedBackgroundInset: CGFloat = 2.0 {
         didSet { setNeedsLayout() }
     }
     
-    public var selectedBackgroundColor: UIColor! {
+    @objc public var selectedBackgroundColor: UIColor! {
         set { selectedBackgroundView.backgroundColor = newValue }
         get { return selectedBackgroundView.backgroundColor }
     }
     
-    public var titleColor: UIColor! {
+    @objc public var titleColor: UIColor! {
         set { (leftTitleLabel.textColor, rightTitleLabel.textColor) = (newValue, newValue) }
         get { return leftTitleLabel.textColor }
     }
     
-    public var selectedTitleColor: UIColor! {
+    @objc public var selectedTitleColor: UIColor! {
         set { (selectedLeftTitleLabel.textColor, selectedRightTitleLabel.textColor) = (newValue, newValue) }
         get { return selectedLeftTitleLabel.textColor }
     }
     
-    public var titleFont: UIFont! {
+    @objc public var titleFont: UIFont! {
         set { (leftTitleLabel.font, rightTitleLabel.font, selectedLeftTitleLabel.font, selectedRightTitleLabel.font) = (newValue, newValue, newValue, newValue) }
         get { return leftTitleLabel.font }
     }
     
-    public var animationDuration: NSTimeInterval = 0.3
-    public var animationSpringDamping: CGFloat = 0.75
-    public var animationInitialSpringVelocity: CGFloat = 0.0
+    @objc public var animationDuration: NSTimeInterval = 0.3
+    @objc public var animationSpringDamping: CGFloat = 0.75
+    @objc public var animationInitialSpringVelocity: CGFloat = 0.0
     
     // MARK: -
     // MARK: Private vars
     
-    private var titleLabelsContentView = UIView()
-    private var leftTitleLabel = UILabel()
-    private var rightTitleLabel = UILabel()
+    @objc private var titleLabelsContentView = UIView()
+    @objc private var leftTitleLabel = UILabel()
+    @objc private var rightTitleLabel = UILabel()
     
-    private var selectedTitleLabelsContentView = UIView()
-    private var selectedLeftTitleLabel = UILabel()
-    private var selectedRightTitleLabel = UILabel()
+    @objc private var selectedTitleLabelsContentView = UIView()
+    @objc private var selectedLeftTitleLabel = UILabel()
+    @objc private var selectedRightTitleLabel = UILabel()
     
-    private(set) var selectedBackgroundView = UIView()
+    @objc private(set) var selectedBackgroundView = UIView()
     
-    private var titleMaskView: UIView = UIView()
+    @objc private var titleMaskView: UIView = UIView()
     
-    private var tapGesture: UITapGestureRecognizer!
-    private var panGesture: UIPanGestureRecognizer!
+    @objc private var tapGesture: UITapGestureRecognizer!
+    @objc private var panGesture: UIPanGestureRecognizer!
     
     private var initialSelectedBackgroundViewFrame: CGRect?
     
     // MARK: -
     // MARK: Constructors
     
+    @objc
     public init(leftTitle: String!, rightTitle: String!) {
         super.init(frame: CGRect.zero)
         
@@ -99,18 +100,21 @@ public class DGRunkeeperSwitch: UIControl {
         finishInit()
     }
     
+    @objc
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         finishInit()
     }
     
+    @objc
     override public init(frame: CGRect) {
         super.init(frame: frame)
         
         finishInit()
     }
     
+    @objc
     private func finishInit() {
         // Setup views
         (leftTitleLabel.lineBreakMode, rightTitleLabel.lineBreakMode) = (.ByTruncatingTail, .ByTruncatingTail)
@@ -152,6 +156,7 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Destructor
     
+    @objc
     deinit {
         removeObserver(self, forKeyPath: "selectedBackgroundView.frame")
     }
@@ -159,6 +164,7 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Observer
     
+    @objc
     override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "selectedBackgroundView.frame" {
             titleMaskView.frame = selectedBackgroundView.frame
@@ -167,10 +173,12 @@ public class DGRunkeeperSwitch: UIControl {
     
     // MARK: -
     
+    @objc
     override public class func layerClass() -> AnyClass {
         return DGRunkeeperSwitchRoundedLayer.self
     }
     
+    @objc
     func tapped(gesture: UITapGestureRecognizer!) {
         let location = gesture.locationInView(self)
         if location.x < bounds.width / 2.0 {
@@ -180,6 +188,7 @@ public class DGRunkeeperSwitch: UIControl {
         }
     }
     
+    @objc
     func pan(gesture: UIPanGestureRecognizer!) {
         if gesture.state == .Began {
             initialSelectedBackgroundViewFrame = selectedBackgroundView.frame
@@ -190,6 +199,7 @@ public class DGRunkeeperSwitch: UIControl {
             selectedBackgroundView.frame = frame
         } else if gesture.state == .Ended || gesture.state == .Failed || gesture.state == .Cancelled {
             let velocityX = gesture.velocityInView(self).x
+            
             if velocityX > 500.0 {
                 setSelectedIndex(1, animated: true)
             } else if velocityX < -500.0 {
@@ -202,12 +212,10 @@ public class DGRunkeeperSwitch: UIControl {
         }
     }
     
+    @objc
     public func setSelectedIndex(selectedIndex: Int, animated: Bool) {
-        
-        // Reset switch on half pan gestures
-        var catchHalfSwitch:Bool = false
         if self.selectedIndex == selectedIndex {
-            catchHalfSwitch = true
+            return
         }
         
         self.selectedIndex = selectedIndex
@@ -216,9 +224,7 @@ public class DGRunkeeperSwitch: UIControl {
                 self.layoutSubviews()
                 }, completion: { (finished) -> Void in
                     if finished {
-                        if (!catchHalfSwitch) {
-                            self.sendActionsForControlEvents(.ValueChanged)
-                        }
+                        self.sendActionsForControlEvents(.ValueChanged)
                     }
             })
         } else {
@@ -230,6 +236,7 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Layout
     
+    @objc
     override public func layoutSubviews() {
         super.layoutSubviews()
         
@@ -263,6 +270,7 @@ public class DGRunkeeperSwitch: UIControl {
 
 extension DGRunkeeperSwitch: UIGestureRecognizerDelegate {
     
+    @objc
     override public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == panGesture {
             return selectedBackgroundView.frame.contains(gestureRecognizer.locationInView(self))
