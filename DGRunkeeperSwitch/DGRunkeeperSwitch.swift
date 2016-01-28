@@ -22,37 +22,45 @@ public class DGRunkeeperSwitchRoundedLayer: CALayer {
 // MARK: -
 // MARK: DGRunkeeperSwitch
 
+
+@IBDesignable
 public class DGRunkeeperSwitch: UIControl {
     
     // MARK: -
     // MARK: Public vars
     
+    @IBInspectable
     public var leftTitle: String {
         set { (leftTitleLabel.text, selectedLeftTitleLabel.text) = (newValue, newValue) }
         get { return leftTitleLabel.text! }
     }
     
+    @IBInspectable
     public var rightTitle: String {
         set { (rightTitleLabel.text, selectedRightTitleLabel.text) = (newValue, newValue) }
         get { return rightTitleLabel.text! }
     }
     
+    @IBInspectable
     private(set) public var selectedIndex: Int = 0
     
     public var selectedBackgroundInset: CGFloat = 2.0 {
         didSet { setNeedsLayout() }
     }
     
+    @IBInspectable
     public var selectedBackgroundColor: UIColor! {
         set { selectedBackgroundView.backgroundColor = newValue }
         get { return selectedBackgroundView.backgroundColor }
     }
     
+    @IBInspectable
     public var titleColor: UIColor! {
         set { (leftTitleLabel.textColor, rightTitleLabel.textColor) = (newValue, newValue) }
         get { return leftTitleLabel.textColor }
     }
     
+    @IBInspectable
     public var selectedTitleColor: UIColor! {
         set { (selectedLeftTitleLabel.textColor, selectedRightTitleLabel.textColor) = (newValue, newValue) }
         get { return selectedLeftTitleLabel.textColor }
