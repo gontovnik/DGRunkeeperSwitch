@@ -119,6 +119,15 @@ public class DGRunkeeperSwitch: UIControl {
         finishInit()
     }
     
+    
+    public func addCustomPanGestureRecognizerForView(view : UIView) -> UIPanGestureRecognizer {
+        
+        let customPanGesture = UIPanGestureRecognizer(target: self, action: "pan:")
+        customPanGesture.delegate = self
+        view.addGestureRecognizer(customPanGesture)
+        return customPanGesture
+    }
+    
     private func finishInit() {
         // Setup views
         (leftTitleLabel.lineBreakMode, rightTitleLabel.lineBreakMode) = (.ByTruncatingTail, .ByTruncatingTail)
@@ -189,15 +198,23 @@ public class DGRunkeeperSwitch: UIControl {
     }
     
     func pan(gesture: UIPanGestureRecognizer!) {
+        
+        var scaleFactor: CGFloat = 1.0
+        if gesture != panGesture {
+            if let viewFrame = gesture.view?.frame {
+                scaleFactor = selectedBackgroundView.frame.width / viewFrame.width
+            }
+        }
+        
         if gesture.state == .Began {
             initialSelectedBackgroundViewFrame = selectedBackgroundView.frame
         } else if gesture.state == .Changed {
             var frame = initialSelectedBackgroundViewFrame!
-            frame.origin.x += gesture.translationInView(self).x
+            frame.origin.x += gesture.translationInView(self).x * scaleFactor
             frame.origin.x = max(min(frame.origin.x, bounds.width - selectedBackgroundInset - frame.width), selectedBackgroundInset)
             selectedBackgroundView.frame = frame
         } else if gesture.state == .Ended || gesture.state == .Failed || gesture.state == .Cancelled {
-            let velocityX = gesture.velocityInView(self).x
+            let velocityX = gesture.velocityInView(self).x * scaleFactor
             if velocityX > 500.0 {
                 setSelectedIndex(1, animated: true)
             } else if velocityX < -500.0 {
