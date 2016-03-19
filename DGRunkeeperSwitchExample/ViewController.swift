@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         navigationController!.navigationBar.translucent = false
         navigationController!.navigationBar.barTintColor = UIColor(red: 252.0/255.0, green: 182.0/255.0, blue: 54.0/255.0, alpha: 1.0)
         
-        let runkeeperSwitch = DGRunkeeperSwitch(leftTitle: "Feed", rightTitle: "Leaderboard")
+        let runkeeperSwitch = DGRunkeeperSwitch(titles: ["Feed", "Leaderboard"])
         runkeeperSwitch.backgroundColor = UIColor(red: 229.0/255.0, green: 163.0/255.0, blue: 48.0/255.0, alpha: 1.0)
         runkeeperSwitch.selectedBackgroundColor = .whiteColor()
         runkeeperSwitch.titleColor = .whiteColor()
@@ -37,8 +37,7 @@ class ViewController: UIViewController {
         navigationItem.titleView = runkeeperSwitch
         
         let runkeeperSwitch2 = DGRunkeeperSwitch()
-        runkeeperSwitch2.leftTitle = "Weekly"
-        runkeeperSwitch2.rightTitle = "Monthly"
+        runkeeperSwitch2.titles = ["Daily", "Weekly", "Monthly", "Yearly"]
         runkeeperSwitch2.backgroundColor = UIColor(red: 239.0/255.0, green: 95.0/255.0, blue: 49.0/255.0, alpha: 1.0)
         runkeeperSwitch2.selectedBackgroundColor = .whiteColor()
         runkeeperSwitch2.titleColor = .whiteColor()
@@ -49,8 +48,7 @@ class ViewController: UIViewController {
         view.addSubview(runkeeperSwitch2)
         
         let runkeeperSwitch3 = DGRunkeeperSwitch()
-        runkeeperSwitch3.leftTitle = "Super long left title"
-        runkeeperSwitch3.rightTitle = "Super long right title"
+        runkeeperSwitch3.titles = ["Long left title", "Super long right title"]
         runkeeperSwitch3.backgroundColor = UIColor(red: 239.0/255.0, green: 95.0/255.0, blue: 49.0/255.0, alpha: 1.0)
         runkeeperSwitch3.selectedBackgroundColor = .whiteColor()
         runkeeperSwitch3.titleColor = .whiteColor()
@@ -61,8 +59,7 @@ class ViewController: UIViewController {
         view.addSubview(runkeeperSwitch3)
         
         if let runkeeperSwitch4 = runkeeperSwitch4 {
-            runkeeperSwitch4.leftTitle = "Apple"
-            runkeeperSwitch4.rightTitle = "Google"
+            runkeeperSwitch4.titles = ["Apple", "Google"]
             runkeeperSwitch4.backgroundColor = UIColor(red: 122/255.0, green: 203/255.0, blue: 108/255.0, alpha: 1.0)
             runkeeperSwitch4.selectedBackgroundColor = .whiteColor()
             runkeeperSwitch4.titleColor = .whiteColor()
