@@ -29,7 +29,6 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Public vars
     
-    @IBInspectable
     public var titles: [String] {
         set {
             (titleLabels + selectedTitleLabels).forEach { $0.removeFromSuperview() }
