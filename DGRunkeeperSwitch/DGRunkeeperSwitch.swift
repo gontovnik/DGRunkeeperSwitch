@@ -195,8 +195,7 @@ public class DGRunkeeperSwitch: UIControl {
             frame.origin.x = max(min(frame.origin.x, bounds.width - selectedBackgroundInset - frame.width), selectedBackgroundInset)
             selectedBackgroundView.frame = frame
         } else if gesture.state == .Ended || gesture.state == .Failed || gesture.state == .Cancelled {
-            let targetX = selectedBackgroundView.center.x + (gesture.velocityInView(self).x * (selectedBackgroundView.bounds.width / 1500))
-            let index = max(0, min(titleLabels.count - 1, Int(targetX / (bounds.width / CGFloat(titleLabels.count)))))
+            let index = max(0, min(titleLabels.count - 1, Int(selectedBackgroundView.center.x / (bounds.width / CGFloat(titleLabels.count)))))
             setSelectedIndex(index, animated: true)
         }
     }
