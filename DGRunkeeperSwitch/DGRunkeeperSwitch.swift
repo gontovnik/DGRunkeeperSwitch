@@ -220,15 +220,12 @@ public class DGRunkeeperSwitch: UIControl {
         
         self.selectedIndex = selectedIndex
         if animated {
+            if (!catchHalfSwitch) {
+                self.sendActionsForControlEvents(.ValueChanged)
+            }
             UIView.animateWithDuration(animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [UIViewAnimationOptions.BeginFromCurrentState, UIViewAnimationOptions.CurveEaseOut], animations: { () -> Void in
                 self.layoutSubviews()
-                }, completion: { (finished) -> Void in
-                    if finished {
-                        if (!catchHalfSwitch) {
-                            self.sendActionsForControlEvents(.ValueChanged)
-                        }
-                    }
-            })
+                }, completion: nil)
         } else {
             layoutSubviews()
             sendActionsForControlEvents(.ValueChanged)
