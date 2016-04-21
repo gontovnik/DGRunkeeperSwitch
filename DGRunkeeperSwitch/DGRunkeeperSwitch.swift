@@ -71,6 +71,12 @@ public class DGRunkeeperSwitch: UIControl {
         get { return leftTitleLabel.font }
     }
     
+    @IBInspectable
+    public var titleFontFamily: String = "HelveticaNeue"
+    
+    @IBInspectable
+    public var titleFontSize: CGFloat = 18.0
+    
     public var animationDuration: NSTimeInterval = 0.3
     public var animationSpringDamping: CGFloat = 0.75
     public var animationInitialSpringVelocity: CGFloat = 0.0
@@ -162,6 +168,12 @@ public class DGRunkeeperSwitch: UIControl {
     
     deinit {
         removeObserver(self, forKeyPath: "selectedBackgroundView.frame")
+    }
+    
+    // MARK: -
+    // MARK: AwakeFromNib
+    override public func awakeFromNib() {
+        self.titleFont = UIFont(name: self.titleFontFamily, size: self.titleFontSize)
     }
     
     // MARK: -
