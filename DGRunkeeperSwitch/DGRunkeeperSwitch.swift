@@ -147,7 +147,9 @@ public class DGRunkeeperSwitch: UIControl {
         selectedTitleLabelsContentView.layer.mask = titleMaskView.layer
         
         // Setup defaul colors
-        backgroundColor = .blackColor()
+        if backgroundColor == nil {
+            backgroundColor = .blackColor()
+        }
         selectedBackgroundColor = .whiteColor()
         titleColor = .whiteColor()
         selectedTitleColor = .blackColor()

@@ -35,12 +35,12 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EFc-Vj-jEB" customClass="DGRunkeeperSwitch" customModule="DGRunkeeperSwitchExample" customModuleProvider="target">
                                 <rect key="frame" x="20" y="530" width="560" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.47843137254901957" green="0.79607843137254897" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Ukk-Qo-fpC"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="titleFontFamily" value="HelveticaNeue-Light"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titleFontFamily" value="Times New Roman"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="titleFontSize">
                                         <real key="value" value="17"/>
                                     </userDefinedRuntimeAttribute>

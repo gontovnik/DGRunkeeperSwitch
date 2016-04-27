@@ -63,7 +63,6 @@ class ViewController: UIViewController {
         if let runkeeperSwitch4 = runkeeperSwitch4 {
             runkeeperSwitch4.leftTitle = "Apple"
             runkeeperSwitch4.rightTitle = "Google"
-            runkeeperSwitch4.backgroundColor = UIColor(red: 122/255.0, green: 203/255.0, blue: 108/255.0, alpha: 1.0)
             runkeeperSwitch4.selectedBackgroundColor = .whiteColor()
             runkeeperSwitch4.titleColor = .whiteColor()
             runkeeperSwitch4.selectedTitleColor = UIColor(red: 135/255.0, green: 227/255.0, blue: 120/255.0, alpha: 1.0)
