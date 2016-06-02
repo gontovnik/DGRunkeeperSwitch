@@ -117,6 +117,7 @@ public class DGRunkeeperSwitch: UIControl {
         super.init(frame: frame)
         
         finishInit()
+        backgroundColor = .blackColor() // don't set background color in finishInit(), otherwise IB settings which are applied in init?(coder:) are overwritten
     }
     
     private func finishInit() {
@@ -141,7 +142,6 @@ public class DGRunkeeperSwitch: UIControl {
         selectedTitleLabelsContentView.layer.mask = titleMaskView.layer
         
         // Setup defaul colors
-        backgroundColor = .blackColor()
         selectedBackgroundColor = .whiteColor()
         titleColor = .whiteColor()
         selectedTitleColor = .blackColor()
