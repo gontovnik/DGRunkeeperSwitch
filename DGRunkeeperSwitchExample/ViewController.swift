@@ -36,6 +36,8 @@ class ViewController: UIViewController {
         runkeeperSwitch.addTarget(self, action: Selector("switchValueDidChange:"), forControlEvents: .ValueChanged)
         navigationItem.titleView = runkeeperSwitch
         
+        runkeeperSwitch.addCustomPanGestureRecognizerForView(self.view)
+        
         let runkeeperSwitch2 = DGRunkeeperSwitch()
         runkeeperSwitch2.leftTitle = "Weekly"
         runkeeperSwitch2.rightTitle = "Monthly"
