@@ -68,6 +68,7 @@ class ViewController: UIViewController {
             runkeeperSwitch4.titleColor = .whiteColor()
             runkeeperSwitch4.selectedTitleColor = UIColor(red: 135/255.0, green: 227/255.0, blue: 120/255.0, alpha: 1.0)
             runkeeperSwitch4.titleFont = UIFont(name: "HelveticaNeue-Light", size: 17.0)
+            runkeeperSwitch4.toggleMode = true
         }
     }
     

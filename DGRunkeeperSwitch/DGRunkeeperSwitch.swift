@@ -74,6 +74,7 @@ public class DGRunkeeperSwitch: UIControl {
     public var animationDuration: NSTimeInterval = 0.3
     public var animationSpringDamping: CGFloat = 0.75
     public var animationInitialSpringVelocity: CGFloat = 0.0
+    public var toggleMode = false
     
     // MARK: -
     // MARK: Private vars
@@ -180,11 +181,16 @@ public class DGRunkeeperSwitch: UIControl {
     }
     
     func tapped(gesture: UITapGestureRecognizer!) {
-        let location = gesture.locationInView(self)
-        if location.x < bounds.width / 2.0 {
-            setSelectedIndex(0, animated: true)
-        } else {
-            setSelectedIndex(1, animated: true)
+        if toggleMode {
+            setSelectedIndex((selectedIndex == 0) ? 1 : 0, animated: true)
+        }
+        else {
+            let location = gesture.locationInView(self)
+            if location.x < bounds.width / 2.0 {
+                setSelectedIndex(0, animated: true)
+            } else {
+                setSelectedIndex(1, animated: true)
+            }
         }
     }
     
