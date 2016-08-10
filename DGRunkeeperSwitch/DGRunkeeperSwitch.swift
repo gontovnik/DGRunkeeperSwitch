@@ -56,7 +56,6 @@ public class DGRunkeeperSwitch: UIControl {
         get { return titleLabels.map { $0.text! } }
     }
     
-    @IBInspectable
     private(set) public var selectedIndex: Int = 0
     
     public var selectedBackgroundInset: CGFloat = 2.0 {
@@ -82,6 +81,12 @@ public class DGRunkeeperSwitch: UIControl {
     public var titleFont: UIFont! {
         didSet { (titleLabels + selectedTitleLabels).forEach { $0.font = titleFont } }
     }
+    
+    @IBInspectable
+    public var titleFontFamily: String = "HelveticaNeue"
+    
+    @IBInspectable
+    public var titleFontSize: CGFloat = 18.0
     
     public var animationDuration: NSTimeInterval = 0.3
     public var animationSpringDamping: CGFloat = 0.75
@@ -142,21 +147,30 @@ public class DGRunkeeperSwitch: UIControl {
         titleMaskView.backgroundColor = .blackColor()
         selectedTitleLabelsContentView.layer.mask = titleMaskView.layer
         
-        // Setup default colors
-        backgroundColor = .blackColor()
+        // Setup defaul colors
+        if backgroundColor == nil {
+            backgroundColor = .blackColor()
+        }
+        
         selectedBackgroundColor = .whiteColor()
         titleColor = .whiteColor()
         selectedTitleColor = .blackColor()
         
         // Gestures
-        tapGesture = UITapGestureRecognizer(target: self, action: "tapped:")
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
         addGestureRecognizer(tapGesture)
         
-        panGesture = UIPanGestureRecognizer(target: self, action: "pan:")
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(pan))
         panGesture.delegate = self
         addGestureRecognizer(panGesture)
         
         addObserver(self, forKeyPath: "selectedBackgroundView.frame", options: .New, context: nil)
+    }
+    
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.titleFont = UIFont(name: self.titleFontFamily, size: self.titleFontSize)
     }
     
     // MARK: -
