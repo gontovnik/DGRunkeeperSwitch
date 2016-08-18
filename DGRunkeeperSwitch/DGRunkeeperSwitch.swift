@@ -29,19 +29,33 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Public vars
     
-    @IBInspectable
-    public var leftTitle: String {
-        set { (leftTitleLabel.text, selectedLeftTitleLabel.text) = (newValue, newValue) }
-        get { return leftTitleLabel.text! }
+    public var titles: [String] {
+        set {
+            (titleLabels + selectedTitleLabels).forEach { $0.removeFromSuperview() }
+            titleLabels = newValue.map { title in
+                let label = UILabel()
+                label.text = title
+                label.textColor = titleColor
+                label.font = titleFont
+                label.textAlignment = .Center
+                label.lineBreakMode = .ByTruncatingTail
+                titleLabelsContentView.addSubview(label)
+                return label
+            }
+            selectedTitleLabels = newValue.map { title in
+                let label = UILabel()
+                label.text = title
+                label.textColor = selectedTitleColor
+                label.font = titleFont
+                label.textAlignment = .Center
+                label.lineBreakMode = .ByTruncatingTail
+                selectedTitleLabelsContentView.addSubview(label)
+                return label
+            }
+        }
+        get { return titleLabels.map { $0.text! } }
     }
     
-    @IBInspectable
-    public var rightTitle: String {
-        set { (rightTitleLabel.text, selectedRightTitleLabel.text) = (newValue, newValue) }
-        get { return rightTitleLabel.text! }
-    }
-    
-    @IBInspectable
     private(set) public var selectedIndex: Int = 0
     
     public var selectedBackgroundInset: CGFloat = 2.0 {
@@ -56,22 +70,29 @@ public class DGRunkeeperSwitch: UIControl {
     
     @IBInspectable
     public var titleColor: UIColor! {
-        set { (leftTitleLabel.textColor, rightTitleLabel.textColor) = (newValue, newValue) }
-        get { return leftTitleLabel.textColor }
+        didSet { titleLabels.forEach { $0.textColor = titleColor } }
     }
     
     @IBInspectable
     public var selectedTitleColor: UIColor! {
-        set { (selectedLeftTitleLabel.textColor, selectedRightTitleLabel.textColor) = (newValue, newValue) }
-        get { return selectedLeftTitleLabel.textColor }
+        didSet { selectedTitleLabels.forEach { $0.textColor = selectedTitleColor } }
     }
     
     public var titleFont: UIFont! {
-        set { (leftTitleLabel.font, rightTitleLabel.font, selectedLeftTitleLabel.font, selectedRightTitleLabel.font) = (newValue, newValue, newValue, newValue) }
-        get { return leftTitleLabel.font }
+        didSet { (titleLabels + selectedTitleLabels).forEach { $0.font = titleFont } }
     }
     
+<<<<<<< HEAD
     public var animationDuration: TimeInterval = 0.3
+=======
+    @IBInspectable
+    public var titleFontFamily: String = "HelveticaNeue"
+    
+    @IBInspectable
+    public var titleFontSize: CGFloat = 18.0
+    
+    public var animationDuration: NSTimeInterval = 0.3
+>>>>>>> gontovnik/master
     public var animationSpringDamping: CGFloat = 0.75
     public var animationInitialSpringVelocity: CGFloat = 0.0
     
@@ -79,12 +100,10 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: Private vars
     
     private var titleLabelsContentView = UIView()
-    private var leftTitleLabel = UILabel()
-    private var rightTitleLabel = UILabel()
+    private var titleLabels = [UILabel]()
     
     private var selectedTitleLabelsContentView = UIView()
-    private var selectedLeftTitleLabel = UILabel()
-    private var selectedRightTitleLabel = UILabel()
+    private var selectedTitleLabels = [UILabel]()
     
     private(set) var selectedBackgroundView = UIView()
     
@@ -98,11 +117,10 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Constructors
     
-    public init(leftTitle: String!, rightTitle: String!) {
+    public init(titles: [String]) {
         super.init(frame: CGRect.zero)
         
-        self.leftTitle = leftTitle
-        self.rightTitle = rightTitle
+        self.titles = titles
         
         finishInit()
     }
@@ -122,26 +140,31 @@ public class DGRunkeeperSwitch: UIControl {
     
     private func finishInit() {
         // Setup views
+<<<<<<< HEAD
         (leftTitleLabel.lineBreakMode, rightTitleLabel.lineBreakMode) = (.byTruncatingTail, .byTruncatingTail)
         
         titleLabelsContentView.addSubview(leftTitleLabel)
         titleLabelsContentView.addSubview(rightTitleLabel)
+=======
+>>>>>>> gontovnik/master
         addSubview(titleLabelsContentView)
         
         object_setClass(selectedBackgroundView.layer, DGRunkeeperSwitchRoundedLayer.self)
         addSubview(selectedBackgroundView)
         
-        selectedTitleLabelsContentView.addSubview(selectedLeftTitleLabel)
-        selectedTitleLabelsContentView.addSubview(selectedRightTitleLabel)
         addSubview(selectedTitleLabelsContentView)
         
+<<<<<<< HEAD
         (leftTitleLabel.textAlignment, rightTitleLabel.textAlignment, selectedLeftTitleLabel.textAlignment, selectedRightTitleLabel.textAlignment) = (.center, .center, .center, .center)
         
+=======
+>>>>>>> gontovnik/master
         object_setClass(titleMaskView.layer, DGRunkeeperSwitchRoundedLayer.self)
         titleMaskView.backgroundColor = .black()
         selectedTitleLabelsContentView.layer.mask = titleMaskView.layer
         
         // Setup defaul colors
+<<<<<<< HEAD
         selectedBackgroundColor = .white()
         titleColor = .white()
         selectedTitleColor = .black()
@@ -151,10 +174,31 @@ public class DGRunkeeperSwitch: UIControl {
         addGestureRecognizer(tapGesture)
         
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(DGRunkeeperSwitch.pan(_:)))
+=======
+        if backgroundColor == nil {
+            backgroundColor = .blackColor()
+        }
+        
+        selectedBackgroundColor = .whiteColor()
+        titleColor = .whiteColor()
+        selectedTitleColor = .blackColor()
+        
+        // Gestures
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        addGestureRecognizer(tapGesture)
+        
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(pan))
+>>>>>>> gontovnik/master
         panGesture.delegate = self
         addGestureRecognizer(panGesture)
         
         addObserver(self, forKeyPath: "selectedBackgroundView.frame", options: .new, context: nil)
+    }
+    
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.titleFont = UIFont(name: self.titleFontFamily, size: self.titleFontSize)
     }
     
     // MARK: -
@@ -179,6 +223,7 @@ public class DGRunkeeperSwitch: UIControl {
         return DGRunkeeperSwitchRoundedLayer.self
     }
     
+<<<<<<< HEAD
     func tapped(_ gesture: UITapGestureRecognizer!) {
         let location = gesture.location(in: self)
         if location.x < bounds.width / 2.0 {
@@ -186,6 +231,12 @@ public class DGRunkeeperSwitch: UIControl {
         } else {
             setSelectedIndex(1, animated: true)
         }
+=======
+    func tapped(gesture: UITapGestureRecognizer!) {
+        let location = gesture.locationInView(self)
+        let index = Int(location.x / (bounds.width / CGFloat(titleLabels.count)))
+        setSelectedIndex(index, animated: true)
+>>>>>>> gontovnik/master
     }
     
     func pan(_ gesture: UIPanGestureRecognizer!) {
@@ -196,6 +247,7 @@ public class DGRunkeeperSwitch: UIControl {
             frame.origin.x += gesture.translation(in: self).x
             frame.origin.x = max(min(frame.origin.x, bounds.width - selectedBackgroundInset - frame.width), selectedBackgroundInset)
             selectedBackgroundView.frame = frame
+<<<<<<< HEAD
         } else if gesture.state == .ended || gesture.state == .failed || gesture.state == .cancelled {
             let velocityX = gesture.velocity(in: self).x
             if velocityX > 500.0 {
@@ -211,6 +263,16 @@ public class DGRunkeeperSwitch: UIControl {
     }
     
     public func setSelectedIndex(_ selectedIndex: Int, animated: Bool) {
+=======
+        } else if gesture.state == .Ended || gesture.state == .Failed || gesture.state == .Cancelled {
+            let index = max(0, min(titleLabels.count - 1, Int(selectedBackgroundView.center.x / (bounds.width / CGFloat(titleLabels.count)))))
+            setSelectedIndex(index, animated: true)
+        }
+    }
+    
+    public func setSelectedIndex(selectedIndex: Int, animated: Bool) {
+        guard 0..<titleLabels.count ~= selectedIndex else { return }
+>>>>>>> gontovnik/master
         
         // Reset switch on half pan gestures
         var catchHalfSwitch:Bool = false
@@ -238,7 +300,7 @@ public class DGRunkeeperSwitch: UIControl {
     override public func layoutSubviews() {
         super.layoutSubviews()
         
-        let selectedBackgroundWidth = bounds.width / 2.0 - selectedBackgroundInset * 2.0
+        let selectedBackgroundWidth = bounds.width / CGFloat(titleLabels.count) - selectedBackgroundInset * 2.0
         selectedBackgroundView.frame = CGRect(x: selectedBackgroundInset + CGFloat(selectedIndex) * (selectedBackgroundWidth + selectedBackgroundInset * 2.0), y: selectedBackgroundInset, width: selectedBackgroundWidth, height: bounds.height - selectedBackgroundInset * 2.0)
         
         (titleLabelsContentView.frame, selectedTitleLabelsContentView.frame) = (bounds, bounds)
@@ -246,6 +308,7 @@ public class DGRunkeeperSwitch: UIControl {
         let titleLabelMaxWidth = selectedBackgroundWidth
         let titleLabelMaxHeight = bounds.height - selectedBackgroundInset * 2.0
         
+<<<<<<< HEAD
         var leftTitleLabelSize = leftTitleLabel.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
         leftTitleLabelSize.width = min(leftTitleLabelSize.width, titleLabelMaxWidth)
         
@@ -263,6 +326,23 @@ public class DGRunkeeperSwitch: UIControl {
         let rightTitleLabelOrigin = CGPoint(x: rightTitleLabelOriginXPosition, y: rightTitleLabelOriginYPosition)
         let rightTitleLabelFrame = CGRect(origin: rightTitleLabelOrigin, size: rightTitleLabelSize)
         (rightTitleLabel.frame, selectedRightTitleLabel.frame) = (rightTitleLabelFrame, rightTitleLabelFrame)
+=======
+        zip(titleLabels, selectedTitleLabels).forEach { label, selectedLabel in
+            let index = titleLabels.indexOf(label)!
+            
+            var size = label.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
+            size.width = min(size.width, titleLabelMaxWidth)
+            
+            let origin = CGPoint(
+                x: floor((bounds.width / CGFloat(titleLabels.count)) * CGFloat(index) + (bounds.width / CGFloat(titleLabels.count) - size.width) / 2.0),
+                y: floor((bounds.height - size.height) / 2.0)
+            )
+            
+            let frame = CGRect(origin: origin, size: size)
+            label.frame = frame
+            selectedLabel.frame = frame
+        }
+>>>>>>> gontovnik/master
     }
     
 }
