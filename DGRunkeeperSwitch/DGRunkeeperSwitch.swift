@@ -82,6 +82,9 @@ public class DGRunkeeperSwitch: UIControl {
         didSet { (titleLabels + selectedTitleLabels).forEach { $0.font = titleFont } }
     }
     
+<<<<<<< HEAD
+    public var animationDuration: TimeInterval = 0.3
+=======
     @IBInspectable
     public var titleFontFamily: String = "HelveticaNeue"
     
@@ -89,6 +92,7 @@ public class DGRunkeeperSwitch: UIControl {
     public var titleFontSize: CGFloat = 18.0
     
     public var animationDuration: NSTimeInterval = 0.3
+>>>>>>> gontovnik/master
     public var animationSpringDamping: CGFloat = 0.75
     public var animationInitialSpringVelocity: CGFloat = 0.0
     
@@ -131,11 +135,18 @@ public class DGRunkeeperSwitch: UIControl {
         super.init(frame: frame)
         
         finishInit()
-        backgroundColor = .blackColor() // don't set background color in finishInit(), otherwise IB settings which are applied in init?(coder:) are overwritten
+        backgroundColor = .black() // don't set background color in finishInit(), otherwise IB settings which are applied in init?(coder:) are overwritten
     }
     
     private func finishInit() {
         // Setup views
+<<<<<<< HEAD
+        (leftTitleLabel.lineBreakMode, rightTitleLabel.lineBreakMode) = (.byTruncatingTail, .byTruncatingTail)
+        
+        titleLabelsContentView.addSubview(leftTitleLabel)
+        titleLabelsContentView.addSubview(rightTitleLabel)
+=======
+>>>>>>> gontovnik/master
         addSubview(titleLabelsContentView)
         
         object_setClass(selectedBackgroundView.layer, DGRunkeeperSwitchRoundedLayer.self)
@@ -143,11 +154,27 @@ public class DGRunkeeperSwitch: UIControl {
         
         addSubview(selectedTitleLabelsContentView)
         
+<<<<<<< HEAD
+        (leftTitleLabel.textAlignment, rightTitleLabel.textAlignment, selectedLeftTitleLabel.textAlignment, selectedRightTitleLabel.textAlignment) = (.center, .center, .center, .center)
+        
+=======
+>>>>>>> gontovnik/master
         object_setClass(titleMaskView.layer, DGRunkeeperSwitchRoundedLayer.self)
-        titleMaskView.backgroundColor = .blackColor()
+        titleMaskView.backgroundColor = .black()
         selectedTitleLabelsContentView.layer.mask = titleMaskView.layer
         
         // Setup defaul colors
+<<<<<<< HEAD
+        selectedBackgroundColor = .white()
+        titleColor = .white()
+        selectedTitleColor = .black()
+        
+        // Gestures
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(DGRunkeeperSwitch.tapped(_:)))
+        addGestureRecognizer(tapGesture)
+        
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(DGRunkeeperSwitch.pan(_:)))
+=======
         if backgroundColor == nil {
             backgroundColor = .blackColor()
         }
@@ -161,10 +188,11 @@ public class DGRunkeeperSwitch: UIControl {
         addGestureRecognizer(tapGesture)
         
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(pan))
+>>>>>>> gontovnik/master
         panGesture.delegate = self
         addGestureRecognizer(panGesture)
         
-        addObserver(self, forKeyPath: "selectedBackgroundView.frame", options: .New, context: nil)
+        addObserver(self, forKeyPath: "selectedBackgroundView.frame", options: .new, context: nil)
     }
     
     override public func awakeFromNib() {
@@ -183,7 +211,7 @@ public class DGRunkeeperSwitch: UIControl {
     // MARK: -
     // MARK: Observer
     
-    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
         if keyPath == "selectedBackgroundView.frame" {
             titleMaskView.frame = selectedBackgroundView.frame
         }
@@ -195,20 +223,47 @@ public class DGRunkeeperSwitch: UIControl {
         return DGRunkeeperSwitchRoundedLayer.self
     }
     
+<<<<<<< HEAD
+    func tapped(_ gesture: UITapGestureRecognizer!) {
+        let location = gesture.location(in: self)
+        if location.x < bounds.width / 2.0 {
+            setSelectedIndex(0, animated: true)
+        } else {
+            setSelectedIndex(1, animated: true)
+        }
+=======
     func tapped(gesture: UITapGestureRecognizer!) {
         let location = gesture.locationInView(self)
         let index = Int(location.x / (bounds.width / CGFloat(titleLabels.count)))
         setSelectedIndex(index, animated: true)
+>>>>>>> gontovnik/master
     }
     
-    func pan(gesture: UIPanGestureRecognizer!) {
-        if gesture.state == .Began {
+    func pan(_ gesture: UIPanGestureRecognizer!) {
+        if gesture.state == .began {
             initialSelectedBackgroundViewFrame = selectedBackgroundView.frame
-        } else if gesture.state == .Changed {
+        } else if gesture.state == .changed {
             var frame = initialSelectedBackgroundViewFrame!
-            frame.origin.x += gesture.translationInView(self).x
+            frame.origin.x += gesture.translation(in: self).x
             frame.origin.x = max(min(frame.origin.x, bounds.width - selectedBackgroundInset - frame.width), selectedBackgroundInset)
             selectedBackgroundView.frame = frame
+<<<<<<< HEAD
+        } else if gesture.state == .ended || gesture.state == .failed || gesture.state == .cancelled {
+            let velocityX = gesture.velocity(in: self).x
+            if velocityX > 500.0 {
+                setSelectedIndex(1, animated: true)
+            } else if velocityX < -500.0 {
+                setSelectedIndex(0, animated: true)
+            } else if selectedBackgroundView.center.x >= bounds.width / 2.0 {
+                setSelectedIndex(1, animated: true)
+            } else if selectedBackgroundView.center.x < bounds.size.width / 2.0 {
+                setSelectedIndex(0, animated: true)
+            }
+        }
+    }
+    
+    public func setSelectedIndex(_ selectedIndex: Int, animated: Bool) {
+=======
         } else if gesture.state == .Ended || gesture.state == .Failed || gesture.state == .Cancelled {
             let index = max(0, min(titleLabels.count - 1, Int(selectedBackgroundView.center.x / (bounds.width / CGFloat(titleLabels.count)))))
             setSelectedIndex(index, animated: true)
@@ -217,6 +272,7 @@ public class DGRunkeeperSwitch: UIControl {
     
     public func setSelectedIndex(selectedIndex: Int, animated: Bool) {
         guard 0..<titleLabels.count ~= selectedIndex else { return }
+>>>>>>> gontovnik/master
         
         // Reset switch on half pan gestures
         var catchHalfSwitch:Bool = false
@@ -227,14 +283,14 @@ public class DGRunkeeperSwitch: UIControl {
         self.selectedIndex = selectedIndex
         if animated {
             if (!catchHalfSwitch) {
-                self.sendActionsForControlEvents(.ValueChanged)
+                self.sendActions(for: .valueChanged)
             }
-            UIView.animateWithDuration(animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [UIViewAnimationOptions.BeginFromCurrentState, UIViewAnimationOptions.CurveEaseOut], animations: { () -> Void in
+            UIView.animate(withDuration: animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [UIViewAnimationOptions.beginFromCurrentState, UIViewAnimationOptions.curveEaseOut], animations: { () -> Void in
                 self.layoutSubviews()
                 }, completion: nil)
         } else {
             layoutSubviews()
-            sendActionsForControlEvents(.ValueChanged)
+            sendActions(for: .valueChanged)
         }
     }
     
@@ -252,6 +308,25 @@ public class DGRunkeeperSwitch: UIControl {
         let titleLabelMaxWidth = selectedBackgroundWidth
         let titleLabelMaxHeight = bounds.height - selectedBackgroundInset * 2.0
         
+<<<<<<< HEAD
+        var leftTitleLabelSize = leftTitleLabel.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
+        leftTitleLabelSize.width = min(leftTitleLabelSize.width, titleLabelMaxWidth)
+        
+        let leftTitleLabelOrigin = CGPoint(x: floor((bounds.width / 2.0 - leftTitleLabelSize.width) / 2.0), y: floor((bounds.height - leftTitleLabelSize.height) / 2.0))
+        let leftTitleLabelFrame = CGRect(origin: leftTitleLabelOrigin, size: leftTitleLabelSize)
+        (leftTitleLabel.frame, selectedLeftTitleLabel.frame) = (leftTitleLabelFrame, leftTitleLabelFrame)
+        
+        var rightTitleLabelSize = rightTitleLabel.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
+        rightTitleLabelSize.width = min(rightTitleLabelSize.width, titleLabelMaxWidth)
+        
+        var rightTitleLabelOriginXPosition = bounds.size.width / 2.0
+        rightTitleLabelOriginXPosition += bounds.width / 2.0 - rightTitleLabelSize.width
+        rightTitleLabelOriginXPosition = floor(rightTitleLabelOriginXPosition / 2)
+        let rightTitleLabelOriginYPosition = floor((bounds.height - rightTitleLabelSize.height) / 2.0)
+        let rightTitleLabelOrigin = CGPoint(x: rightTitleLabelOriginXPosition, y: rightTitleLabelOriginYPosition)
+        let rightTitleLabelFrame = CGRect(origin: rightTitleLabelOrigin, size: rightTitleLabelSize)
+        (rightTitleLabel.frame, selectedRightTitleLabel.frame) = (rightTitleLabelFrame, rightTitleLabelFrame)
+=======
         zip(titleLabels, selectedTitleLabels).forEach { label, selectedLabel in
             let index = titleLabels.indexOf(label)!
             
@@ -267,6 +342,7 @@ public class DGRunkeeperSwitch: UIControl {
             label.frame = frame
             selectedLabel.frame = frame
         }
+>>>>>>> gontovnik/master
     }
     
 }
@@ -276,9 +352,9 @@ public class DGRunkeeperSwitch: UIControl {
 
 extension DGRunkeeperSwitch: UIGestureRecognizerDelegate {
     
-    override public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == panGesture {
-            return selectedBackgroundView.frame.contains(gestureRecognizer.locationInView(self))
+            return selectedBackgroundView.frame.contains(gestureRecognizer.location(in: self))
         }
         return super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
