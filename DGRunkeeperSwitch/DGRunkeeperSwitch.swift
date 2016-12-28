@@ -18,6 +18,7 @@ open class DGRunkeeperSwitchRoundedLayer: CALayer {
     
 }
 
+// MARK: - DGRunkeeperSwitchDelegate
 
 @objc(DGRunkeeperSwitchDelegate)
 public protocol DGRunkeeperSwitchDelegate {
@@ -92,7 +93,7 @@ open class DGRunkeeperSwitch: UIControl {
     @IBInspectable
     open var titleFontSize: CGFloat = 18.0
     
-    open var switchDelegate: DGRunkeeperSwitchDelegate?
+    open weak var switchDelegate: DGRunkeeperSwitchDelegate?
     open var animationDuration: TimeInterval = 0.3
     open var animationSpringDamping: CGFloat = 0.75
     open var animationInitialSpringVelocity: CGFloat = 0.0
@@ -209,14 +210,18 @@ open class DGRunkeeperSwitch: UIControl {
     
     func pan(_ gesture: UIPanGestureRecognizer!) {
         if gesture.state == .began {
+            
             if switchDelegate?.shouldWillSwitchState(DGRSwitch: self) == false {
                 return
             }
+            
             initialSelectedBackgroundViewFrame = selectedBackgroundView.frame
         } else if gesture.state == .changed {
+            
             if switchDelegate?.shouldWillSwitchState(DGRSwitch: self) == false {
                 return
             }
+            
             var frame = initialSelectedBackgroundViewFrame!
             frame.origin.x += gesture.translation(in: self).x
             frame.origin.x = max(min(frame.origin.x, bounds.width - selectedBackgroundInset - frame.width), selectedBackgroundInset)
