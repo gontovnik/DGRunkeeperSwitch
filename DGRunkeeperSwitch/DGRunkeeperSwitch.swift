@@ -225,6 +225,9 @@ open class DGRunkeeperSwitch: UIControl {
             UIView.animate(withDuration: animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [UIViewAnimationOptions.beginFromCurrentState, UIViewAnimationOptions.curveEaseOut], animations: { () -> Void in
                 self.layoutSubviews()
                 }, completion: nil)
+            if #available(iOS 10.0, *) {
+                UIImpactFeedbackGenerator(style: UIImpactFeedbackStyle.light).impactOccurred()
+            }
         } else {
             layoutSubviews()
             sendActions(for: .valueChanged)
