@@ -59,6 +59,8 @@ open class DGRunkeeperSwitch: UIControl {
         didSet { setNeedsLayout() }
     }
     
+    open var impactFeedbackActivated: Bool = false
+    
     @IBInspectable
     open var selectedBackgroundColor: UIColor! {
         set { selectedBackgroundView.backgroundColor = newValue }
@@ -225,7 +227,7 @@ open class DGRunkeeperSwitch: UIControl {
             UIView.animate(withDuration: animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [UIViewAnimationOptions.beginFromCurrentState, UIViewAnimationOptions.curveEaseOut], animations: { () -> Void in
                 self.layoutSubviews()
                 }, completion: nil)
-            if #available(iOS 10.0, *) {
+            if #available(iOS 10.0, *), impactFeedbackActivated {
                 UIImpactFeedbackGenerator(style: UIImpactFeedbackStyle.light).impactOccurred()
             }
         } else {
