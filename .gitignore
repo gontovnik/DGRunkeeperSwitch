@@ -2,3 +2,6 @@ xcuserdata
 *.xccheckout
 *.xcuserstate
 Build/
+.DS_Store
+
+.DS_Store
