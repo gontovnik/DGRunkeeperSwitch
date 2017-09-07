@@ -53,7 +53,7 @@ open class DGRunkeeperSwitch: UIControl {
         get { return titleLabels.map { $0.text! } }
     }
     
-    fileprivate(set) open var selectedIndex: Int = 0
+    fileprivate(set) open var selectedIndex: Int? = 0
     
     open var selectedBackgroundInset: CGFloat = 2.0 {
         didSet { setNeedsLayout() }
@@ -208,8 +208,13 @@ open class DGRunkeeperSwitch: UIControl {
         }
     }
     
-    open func setSelectedIndex(_ selectedIndex: Int, animated: Bool) {
-        guard 0..<titleLabels.count ~= selectedIndex else { return }
+    open func setSelectedIndex(_ selectedIndex: Int?, animated: Bool) {
+        guard let selectedIndex = selectedIndex, 0..<titleLabels.count ~= selectedIndex else {
+            self.selectedIndex = nil
+            layoutSubviews()
+
+            return
+        }
         
         // Reset switch on half pan gestures
         var catchHalfSwitch = false
@@ -237,7 +242,16 @@ open class DGRunkeeperSwitch: UIControl {
         super.layoutSubviews()
         
         let selectedBackgroundWidth = bounds.width / CGFloat(titleLabels.count) - selectedBackgroundInset * 2.0
-        selectedBackgroundView.frame = CGRect(x: selectedBackgroundInset + CGFloat(selectedIndex) * (selectedBackgroundWidth + selectedBackgroundInset * 2.0), y: selectedBackgroundInset, width: selectedBackgroundWidth, height: bounds.height - selectedBackgroundInset * 2.0)
+
+        if let selectedIndex = self.selectedIndex {
+            selectedBackgroundView.frame = CGRect(x: selectedBackgroundInset + CGFloat(selectedIndex) * (selectedBackgroundWidth + selectedBackgroundInset * 2.0), y: selectedBackgroundInset, width: selectedBackgroundWidth, height: bounds.height - selectedBackgroundInset * 2.0)
+            selectedBackgroundView.isHidden = false
+            selectedTitleLabels.forEach { $0.textColor = selectedTitleColor }
+        } else {
+            selectedBackgroundView.frame = CGRect(x: selectedBackgroundInset + CGFloat(0) * (selectedBackgroundWidth + selectedBackgroundInset * 2.0), y: selectedBackgroundInset, width: selectedBackgroundWidth, height: bounds.height - selectedBackgroundInset * 2.0)
+            selectedBackgroundView.isHidden = true
+            selectedTitleLabels.forEach { $0.textColor = titleColor }
+        }
         
         (titleLabelsContentView.frame, selectedTitleLabelsContentView.frame) = (bounds, bounds)
         
