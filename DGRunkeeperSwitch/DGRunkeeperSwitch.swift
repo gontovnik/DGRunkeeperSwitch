@@ -108,7 +108,7 @@ open class DGRunkeeperSwitch: UIControl {
     
     // MARK: - KVO properties
     
-    private var selectedBackgroundViewFrame: NSKeyValueObservation?
+    private var selectedBackgroundViewFrameObserver: NSKeyValueObservation?
     
     // MARK: - Constructors
     
@@ -165,12 +165,20 @@ open class DGRunkeeperSwitch: UIControl {
         
         // Observers
         
-        selectedBackgroundViewFrame = selectedBackgroundView.observe(\.frame, options: NSKeyValueObservingOptions.new) { [weak self] (object, changes) in
+        selectedBackgroundViewFrameObserver = selectedBackgroundView.observe(\.frame, options: NSKeyValueObservingOptions.new) { [weak self] (object, changes) in
             if let newValue = changes.newValue {
                 self?.titleMaskView.frame = newValue
             }
         }
         
+    }
+    
+    deinit {
+        if #available(iOS 11.0, *) {
+            
+        } else {
+            selectedBackgroundViewFrameObserver?.invalidate()
+        }
     }
     
     override open func awakeFromNib() {
