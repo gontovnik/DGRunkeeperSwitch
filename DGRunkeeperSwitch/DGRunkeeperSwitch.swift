@@ -97,7 +97,7 @@ open class DGRunkeeperSwitch: UIControl {
     fileprivate var selectedTitleLabelsContentView = UIView()
     fileprivate var selectedTitleLabels = [UILabel]()
     
-    fileprivate(set) var selectedBackgroundView = UIView()
+    @objc fileprivate(set) var selectedBackgroundView = UIView()
     
     fileprivate var titleMaskView: UIView = UIView()
     
@@ -159,7 +159,7 @@ open class DGRunkeeperSwitch: UIControl {
         panGesture.delegate = self
         addGestureRecognizer(panGesture)
         
-        addObserver(self, forKeyPath: "selectedBackgroundView.frame", options: .new, context: nil)
+        addObserver(self, forKeyPath: #keyPath(selectedBackgroundView.frame), options: .new, context: nil)
     }
     
     override open func awakeFromNib() {
@@ -188,13 +188,13 @@ open class DGRunkeeperSwitch: UIControl {
         return DGRunkeeperSwitchRoundedLayer.self
     }
     
-    func tapped(_ gesture: UITapGestureRecognizer!) {
+    @objc func tapped(_ gesture: UITapGestureRecognizer!) {
         let location = gesture.location(in: self)
         let index = Int(location.x / (bounds.width / CGFloat(titleLabels.count)))
         setSelectedIndex(index, animated: true)
     }
     
-    func pan(_ gesture: UIPanGestureRecognizer!) {
+    @objc func pan(_ gesture: UIPanGestureRecognizer!) {
         if gesture.state == .began {
             initialSelectedBackgroundViewFrame = selectedBackgroundView.frame
         } else if gesture.state == .changed {
