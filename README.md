@@ -23,6 +23,12 @@ All you need to do is drop DGRunkeeperSwitch.swift file into your project
 ### CocoaPods
 
 ``` ruby
+pod "DGRunkeeperSwitch", "~> 1.1.5"
+```
+
+If you want to use the version of DGRunkeeperSwitch compatible with Swift 4 add the following line to your podfile:
+
+``` ruby
 pod "DGRunkeeperSwitch", "~> 1.1.4"
 ```
 
