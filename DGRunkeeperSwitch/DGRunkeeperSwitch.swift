@@ -250,7 +250,7 @@ open class DGRunkeeperSwitch: UIControl {
         let titleLabelMaxHeight = bounds.height - selectedBackgroundInset * 2.0
         
         zip(titleLabels, selectedTitleLabels).forEach { label, selectedLabel in
-            let index = titleLabels.index(of: label)!
+            let index = titleLabels.firstIndex(of: label)!
             
             var size = label.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
             size.width = min(size.width, titleLabelMaxWidth)
