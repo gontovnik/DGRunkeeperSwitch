@@ -45,6 +45,7 @@ class ViewController: UIViewController {
         runkeeperSwitch2.titleFont = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
         runkeeperSwitch2.frame = CGRect(x: 50.0, y: 20.0, width: view.bounds.width - 100.0, height: 30.0)
         runkeeperSwitch2.autoresizingMask = [.flexibleWidth]
+        runkeeperSwitch2.addTarget(self, action: #selector(ViewController.switchValueDidChange(sender:)), for: .valueChanged)
         view.addSubview(runkeeperSwitch2)
         
         let runkeeperSwitch3 = DGRunkeeperSwitch()
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
         runkeeperSwitch3.titleFont = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
         runkeeperSwitch3.frame = CGRect(x: 50.0, y: 70.0, width: view.bounds.width - 100.0, height: 30.0)
         runkeeperSwitch3.autoresizingMask = [.flexibleWidth]
+        runkeeperSwitch3.addTarget(self, action: #selector(ViewController.switchValueDidChange(sender:)), for: .valueChanged)
         view.addSubview(runkeeperSwitch3)
         
         if let runkeeperSwitch4 = runkeeperSwitch4 {
