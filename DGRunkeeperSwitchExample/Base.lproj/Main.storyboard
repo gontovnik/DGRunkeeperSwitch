@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JqM-JB-8mi">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JqM-JB-8mi">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -10,7 +14,7 @@
             <objects>
                 <navigationController id="JqM-JB-8mi" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NN4-ot-C6m">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -30,37 +34,11 @@
                         <viewControllerLayoutGuide type="bottom" id="SNu-9N-SF3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tVs-3B-QU8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EFc-Vj-jEB" customClass="DGRunkeeperSwitch" customModule="DGRunkeeperSwitchExample" customModuleProvider="target">
-                                <rect key="frame" x="20" y="530" width="560" height="50"/>
-                                <color key="backgroundColor" red="0.47843137254901957" green="0.79607843137254897" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Ukk-Qo-fpC"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="titleFontFamily" value="Times New Roman"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="titleFontSize">
-                                        <real key="value" value="17"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="switchValueDidChange:" destination="6an-zX-QAJ" eventType="valueChanged" id="PQ5-rv-cZ8"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="EFc-Vj-jEB" firstAttribute="leading" secondItem="tVs-3B-QU8" secondAttribute="leading" constant="20" id="MH9-53-swC"/>
-                            <constraint firstAttribute="trailing" secondItem="EFc-Vj-jEB" secondAttribute="trailing" constant="20" id="VaE-8p-81t"/>
-                            <constraint firstItem="SNu-9N-SF3" firstAttribute="top" secondItem="EFc-Vj-jEB" secondAttribute="bottom" constant="20" id="iGl-SR-06F"/>
-                        </constraints>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="hlk-SI-d0e"/>
-                    <connections>
-                        <outlet property="runkeeperSwitch4" destination="EFc-Vj-jEB" id="z8c-lE-BQ4"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Rp-S3-jKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
