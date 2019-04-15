@@ -1,15 +1,18 @@
 # DGRunkeeperSwitch
-Runkeeper design switch control (two part segment control) developed in Swift 2.0
+Runkeeper design switch control (two part segment control) developed in Swift 2.0 and I (@aakpro) changed it to swift 5.0 and still waiting for main repository owner to merge it.
+#### So here is new version of DGRunkeeper in swift 5
+#
+#
+#
 
 ![Preview 1](https://raw.githubusercontent.com/gontovnik/DGRunkeeperSwitch/master/DGRunkeeperSwitch.png)
 ![Preview 2](https://raw.githubusercontent.com/gontovnik/DGRunkeeperSwitch/master/DGRunkeeperSwitch.gif)
 
 ## Requirements
-* Xcode 7-beta or higher
-* iOS 8.0 or higher (May work on previous versions, just did not test it. Feel free to edit it).
+* Xcode 10.2 or higher
+* iOS 10.0 or higher (May work on previous versions, just did not test it. Feel free to edit it).
 * ARC
-* Swift 3.0 (old versions are in different releases)
-
+* Swift 5.0 
 ## Demo
 
 Open and run the DGRunkeeperSwitchExample project in Xcode to see DGRunkeeperSwitch in action.
