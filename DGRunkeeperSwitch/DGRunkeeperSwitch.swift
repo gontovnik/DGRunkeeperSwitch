@@ -188,13 +188,13 @@ open class DGRunkeeperSwitch: UIControl {
         return DGRunkeeperSwitchRoundedLayer.self
     }
     
-    func tapped(_ gesture: UITapGestureRecognizer!) {
+    @objc func tapped(_ gesture: UITapGestureRecognizer!) {
         let location = gesture.location(in: self)
         let index = Int(location.x / (bounds.width / CGFloat(titleLabels.count)))
         setSelectedIndex(index, animated: true)
     }
     
-    func pan(_ gesture: UIPanGestureRecognizer!) {
+    @objc func pan(_ gesture: UIPanGestureRecognizer!) {
         if gesture.state == .began {
             initialSelectedBackgroundViewFrame = selectedBackgroundView.frame
         } else if gesture.state == .changed {
@@ -222,7 +222,7 @@ open class DGRunkeeperSwitch: UIControl {
             if (!catchHalfSwitch) {
                 self.sendActions(for: .valueChanged)
             }
-            UIView.animate(withDuration: animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [UIViewAnimationOptions.beginFromCurrentState, UIViewAnimationOptions.curveEaseOut], animations: { () -> Void in
+            UIView.animate(withDuration: animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [UIView.AnimationOptions.beginFromCurrentState, UIView.AnimationOptions.curveEaseOut], animations: { () -> Void in
                 self.layoutSubviews()
                 }, completion: nil)
         } else {
