@@ -159,27 +159,15 @@ open class DGRunkeeperSwitch: UIControl {
         panGesture.delegate = self
         addGestureRecognizer(panGesture)
         
-        addObserver(self, forKeyPath: "selectedBackgroundView.frame", options: .new, context: nil)
+        selectedBackgroundView.observe(\UIView.frame, options: .new) { view, _ in
+            self.titleMaskView.frame = view.frame
+        }
     }
     
     override open func awakeFromNib() {
         super.awakeFromNib()
         
         self.titleFont = UIFont(name: self.titleFontFamily, size: self.titleFontSize)
-    }
-    
-    // MARK: - Destructor
-    
-    deinit {
-        removeObserver(self, forKeyPath: "selectedBackgroundView.frame")
-    }
-    
-    // MARK: - Observer
-    
-    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "selectedBackgroundView.frame" {
-            titleMaskView.frame = selectedBackgroundView.frame
-        }
     }
     
     // MARK: -
