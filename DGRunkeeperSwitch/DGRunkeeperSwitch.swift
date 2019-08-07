@@ -106,6 +106,10 @@ open class DGRunkeeperSwitch: UIControl {
     
     fileprivate var initialSelectedBackgroundViewFrame: CGRect?
     
+    // MARK: - KVO properties
+    
+    private var selectedBackgroundViewFrameObserver: NSKeyValueObservation?
+    
     // MARK: - Constructors
     
     public init(titles: [String]) {
@@ -159,8 +163,18 @@ open class DGRunkeeperSwitch: UIControl {
         panGesture.delegate = self
         addGestureRecognizer(panGesture)
         
-        selectedBackgroundView.observe(\UIView.frame, options: .new) { view, _ in
-            self.titleMaskView.frame = view.frame
+        selectedBackgroundViewFrameObserver = selectedBackgroundView.observe(\.frame, options: .new) { [weak self] (object, changes) in
+            if let newValue = changes.newValue {
+                self?.titleMaskView.frame = newValue
+            }
+        }
+    }
+    
+    deinit {
+        if #available(iOS 11.0, *) {
+            
+        } else {
+            selectedBackgroundViewFrameObserver?.invalidate()
         }
     }
     
