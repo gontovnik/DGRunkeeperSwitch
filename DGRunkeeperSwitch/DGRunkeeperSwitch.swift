@@ -46,6 +46,7 @@ open class DGRunkeeperSwitch: UIControl {
                 label.font = titleFont
                 label.textAlignment = .center
                 label.lineBreakMode = .byTruncatingTail
+                label.isAccessibilityElement = false
                 selectedTitleLabelsContentView.addSubview(label)
                 return label
             }
@@ -134,6 +135,7 @@ open class DGRunkeeperSwitch: UIControl {
     }
     
     fileprivate func finishInit() {
+        accessibilityTraits = .tabBar
         // Setup views
         addSubview(titleLabelsContentView)
         
@@ -220,6 +222,9 @@ open class DGRunkeeperSwitch: UIControl {
         }
         
         self.selectedIndex = selectedIndex
+        for (i, label) in titleLabels.enumerated() {
+            label.accessibilityValue = selectedIndex == i ? "Selected" : ""
+        }
         if animated {
             if (!catchHalfSwitch) {
                 self.sendActions(for: .valueChanged)
