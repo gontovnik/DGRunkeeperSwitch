@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DGRunkeeperSwitch"
-  s.version      = "1.2.0"
+  s.version      = "1.2.1"
   s.authors      = { "Danil Gontovnik" => "danil@gontovnik.com" }
   s.homepage     = "https://github.com/gontovnik/DGRunkeeperSwitch"
   s.summary      = "DGRunkeeperSwitch is Runkeeper design switch control"

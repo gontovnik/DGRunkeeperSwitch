@@ -39,6 +39,9 @@ open class DGRunkeeperSwitch: UIControl {
                 titleLabelsContentView.addSubview(label)
                 return label
             }
+            if selectedIndex < titleLabels.count {
+                titleLabels[selectedIndex].accessibilityValue = "Selected"
+            }
             selectedTitleLabels = newValue.map { title in
                 let label = UILabel()
                 label.text = title
